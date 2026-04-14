@@ -1,9 +1,21 @@
-// Uncomment the code below and write your tests
-// import { throwError, throwCustomError, resolveValue, MyAwesomeError, rejectCustomError } from './index';
+import {
+  // throwError,
+  // throwCustomError,
+  resolveValue,
+  // MyAwesomeError,
+  // rejectCustomError,
+} from './index';
 
 describe('resolveValue', () => {
   test('should resolve provided value', async () => {
-    // Write your test here
+    const primitiveValue = 5;
+    const objectValue = { value: 5 };
+    const [primitiveResult, objectResult] = await Promise.all([
+      resolveValue(primitiveValue),
+      resolveValue(objectValue),
+    ]);
+    expect(primitiveResult).toBe(primitiveValue);
+    expect(objectResult).toBe(objectValue);
   });
 });
 
