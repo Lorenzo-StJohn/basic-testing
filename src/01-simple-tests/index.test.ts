@@ -158,11 +158,51 @@ describe('simpleCalculator tests', () => {
 
   test('should return null for invalid action', () => {
     expect(simpleCalculator({ a: 2, b: 3, action: 'meow' })).toBe(null);
-    expect(simpleCalculator({ a: true, b: 3, action: [] })).toBe(null);
-    expect(simpleCalculator({ a: true, b: [], action: true })).toBe(null);
+    expect(simpleCalculator({ a: 2, b: 3, action: [] })).toBe(null);
+    expect(simpleCalculator({ a: 2, b: 3, action: true })).toBe(null);
   });
 
   test('should return null for invalid arguments', () => {
-    // Write your test here
+    expect(simpleCalculator({ a: 2, b: null, action: Action.Add })).toBe(null);
+    expect(simpleCalculator({ a: null, b: 3, action: Action.Divide })).toBe(
+      null,
+    );
+    expect(
+      simpleCalculator({ a: null, b: null, action: Action.Exponentiate }),
+    ).toBe(null);
+    expect(simpleCalculator({ a: true, b: 3, action: Action.Multiply })).toBe(
+      null,
+    );
+    expect(simpleCalculator({ a: 2, b: true, action: Action.Subtract })).toBe(
+      null,
+    );
+    expect(simpleCalculator({ a: true, b: true, action: Action.Add })).toBe(
+      null,
+    );
+    expect(simpleCalculator({ a: 2, b: '3', action: Action.Divide })).toBe(
+      null,
+    );
+    expect(
+      simpleCalculator({ a: '2', b: 3, action: Action.Exponentiate }),
+    ).toBe(null);
+    expect(simpleCalculator({ a: '2', b: '3', action: Action.Multiply })).toBe(
+      null,
+    );
+    expect(simpleCalculator({ a: [2], b: '3', action: Action.Subtract })).toBe(
+      null,
+    );
+    expect(simpleCalculator({ a: 2, b: [3], action: Action.Add })).toBe(null);
+    expect(simpleCalculator({ a: [2], b: [3], action: Action.Divide })).toBe(
+      null,
+    );
+    expect(
+      simpleCalculator({ a: { a: 2 }, b: 3, action: Action.Exponentiate }),
+    ).toBe(null);
+    expect(
+      simpleCalculator({ a: 2, b: { b: 3 }, action: Action.Multiply }),
+    ).toBe(null);
+    expect(
+      simpleCalculator({ a: { a: 2 }, b: { b: 3 }, action: Action.Subtract }),
+    ).toBe(null);
   });
 });
