@@ -88,7 +88,29 @@ describe('simpleCalculator tests', () => {
   });
 
   test('should divide two numbers', () => {
-    // Write your test here
+    expect(simpleCalculator({ a: 6, b: 2, action: Action.Divide })).toBe(3);
+    expect(simpleCalculator({ a: 6, b: 0, action: Action.Divide })).toBe(
+      Infinity,
+    );
+    expect(simpleCalculator({ a: 0, b: 2, action: Action.Divide })).toBe(0);
+    expect(simpleCalculator({ a: 0, b: 0, action: Action.Divide })).toBeNaN();
+    expect(simpleCalculator({ a: Infinity, b: 0, action: Action.Divide })).toBe(
+      Infinity,
+    );
+    expect(simpleCalculator({ a: NaN, b: 2, action: Action.Divide })).toBeNaN();
+    expect(simpleCalculator({ a: 0, b: NaN, action: Action.Divide })).toBeNaN();
+    expect(
+      simpleCalculator({ a: NaN, b: NaN, action: Action.Divide }),
+    ).toBeNaN();
+    expect(simpleCalculator({ a: 6, b: Infinity, action: Action.Divide })).toBe(
+      0,
+    );
+    expect(simpleCalculator({ a: Infinity, b: 2, action: Action.Divide })).toBe(
+      Infinity,
+    );
+    expect(
+      simpleCalculator({ a: Infinity, b: Infinity, action: Action.Divide }),
+    ).toBeNaN();
   });
 
   test('should exponentiate two numbers', () => {
