@@ -52,7 +52,39 @@ describe('simpleCalculator tests', () => {
   });
 
   test('should multiply two numbers', () => {
-    // Write your test here
+    expect(simpleCalculator({ a: 2, b: 3, action: Action.Multiply })).toBe(6);
+    expect(simpleCalculator({ a: 0, b: 3, action: Action.Multiply })).toBe(0);
+    expect(simpleCalculator({ a: 2, b: 0, action: Action.Multiply })).toBe(0);
+    expect(
+      simpleCalculator({ a: NaN, b: 3, action: Action.Multiply }),
+    ).toBeNaN();
+    expect(
+      simpleCalculator({ a: 2, b: NaN, action: Action.Multiply }),
+    ).toBeNaN();
+    expect(
+      simpleCalculator({ a: NaN, b: NaN, action: Action.Multiply }),
+    ).toBeNaN();
+    expect(
+      simpleCalculator({ a: 2, b: Infinity, action: Action.Multiply }),
+    ).toBe(Infinity);
+    expect(
+      simpleCalculator({ a: Infinity, b: Infinity, action: Action.Multiply }),
+    ).toBe(Infinity);
+    expect(
+      simpleCalculator({ a: Infinity, b: 3, action: Action.Multiply }),
+    ).toBe(Infinity);
+    expect(
+      simpleCalculator({ a: NaN, b: 0, action: Action.Multiply }),
+    ).toBeNaN();
+    expect(
+      simpleCalculator({ a: Infinity, b: 0, action: Action.Multiply }),
+    ).toBeNaN();
+    expect(
+      simpleCalculator({ a: 0, b: NaN, action: Action.Multiply }),
+    ).toBeNaN();
+    expect(
+      simpleCalculator({ a: 0, b: Infinity, action: Action.Multiply }),
+    ).toBeNaN();
   });
 
   test('should divide two numbers', () => {
