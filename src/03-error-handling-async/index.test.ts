@@ -3,7 +3,7 @@ import {
   throwCustomError,
   resolveValue,
   MyAwesomeError,
-  // rejectCustomError,
+  rejectCustomError,
 } from './index';
 
 describe('resolveValue', () => {
@@ -34,6 +34,6 @@ describe('throwCustomError', () => {
 
 describe('rejectCustomError', () => {
   test('should reject custom error', async () => {
-    // Write your test here
+    await expect(() => rejectCustomError()).rejects.toThrow(MyAwesomeError);
   });
 });
