@@ -114,7 +114,46 @@ describe('simpleCalculator tests', () => {
   });
 
   test('should exponentiate two numbers', () => {
-    // Write your test here
+    expect(simpleCalculator({ a: 2, b: 3, action: Action.Exponentiate })).toBe(
+      8,
+    );
+    expect(
+      simpleCalculator({ a: Infinity, b: 0, action: Action.Exponentiate }),
+    ).toBe(1);
+    expect(simpleCalculator({ a: 0, b: 0, action: Action.Exponentiate })).toBe(
+      1,
+    );
+    expect(
+      simpleCalculator({ a: Infinity, b: -1, action: Action.Exponentiate }),
+    ).toBe(0);
+    expect(
+      simpleCalculator({ a: 2, b: Infinity, action: Action.Exponentiate }),
+    ).toBe(Infinity);
+    expect(
+      simpleCalculator({ a: 0, b: Infinity, action: Action.Exponentiate }),
+    ).toBe(0);
+    expect(
+      simpleCalculator({
+        a: Infinity,
+        b: Infinity,
+        action: Action.Exponentiate,
+      }),
+    ).toBe(Infinity);
+    expect(
+      simpleCalculator({ a: NaN, b: 0, action: Action.Exponentiate }),
+    ).toBe(1);
+    expect(
+      simpleCalculator({ a: NaN, b: 3, action: Action.Exponentiate }),
+    ).toBeNaN();
+    expect(
+      simpleCalculator({ a: 2, b: NaN, action: Action.Exponentiate }),
+    ).toBeNaN();
+    expect(
+      simpleCalculator({ a: NaN, b: NaN, action: Action.Exponentiate }),
+    ).toBeNaN();
+    expect(
+      simpleCalculator({ a: NaN, b: Infinity, action: Action.Exponentiate }),
+    ).toBeNaN();
   });
 
   test('should return null for invalid action', () => {
