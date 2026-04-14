@@ -1,8 +1,8 @@
 import {
   throwError,
-  // throwCustomError,
+  throwCustomError,
   resolveValue,
-  // MyAwesomeError,
+  MyAwesomeError,
   // rejectCustomError,
 } from './index';
 
@@ -21,14 +21,14 @@ describe('throwError', () => {
   });
 
   test('should throw error with default message if message is not provided', () => {
-    const msg = 'Oops!';
-    expect(() => throwError()).toThrow(msg);
+    const defaultMessage = 'Oops!';
+    expect(() => throwError()).toThrow(defaultMessage);
   });
 });
 
 describe('throwCustomError', () => {
   test('should throw custom error', () => {
-    // Write your test here
+    expect(() => throwCustomError()).toThrow(MyAwesomeError);
   });
 });
 
