@@ -157,7 +157,9 @@ describe('simpleCalculator tests', () => {
   });
 
   test('should return null for invalid action', () => {
-    // Write your test here
+    expect(simpleCalculator({ a: 2, b: 3, action: 'meow' })).toBe(null);
+    expect(simpleCalculator({ a: true, b: 3, action: [] })).toBe(null);
+    expect(simpleCalculator({ a: true, b: [], action: true })).toBe(null);
   });
 
   test('should return null for invalid arguments', () => {
