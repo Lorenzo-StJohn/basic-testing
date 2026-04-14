@@ -24,7 +24,31 @@ describe('simpleCalculator tests', () => {
   });
 
   test('should subtract two numbers', () => {
-    // Write your test here
+    expect(simpleCalculator({ a: 5, b: 3, action: Action.Subtract })).toBe(2);
+    expect(
+      simpleCalculator({ a: Infinity, b: 3, action: Action.Subtract }),
+    ).toBe(Infinity);
+    expect(
+      simpleCalculator({ a: 5, b: Infinity, action: Action.Subtract }),
+    ).toBe(-Infinity);
+    expect(
+      simpleCalculator({ a: Infinity, b: Infinity, action: Action.Subtract }),
+    ).toBeNaN();
+    expect(
+      simpleCalculator({ a: NaN, b: Infinity, action: Action.Subtract }),
+    ).toBeNaN();
+    expect(
+      simpleCalculator({ a: Infinity, b: NaN, action: Action.Subtract }),
+    ).toBeNaN();
+    expect(
+      simpleCalculator({ a: NaN, b: 3, action: Action.Subtract }),
+    ).toBeNaN();
+    expect(
+      simpleCalculator({ a: 5, b: NaN, action: Action.Subtract }),
+    ).toBeNaN();
+    expect(
+      simpleCalculator({ a: NaN, b: NaN, action: Action.Subtract }),
+    ).toBeNaN();
   });
 
   test('should multiply two numbers', () => {
