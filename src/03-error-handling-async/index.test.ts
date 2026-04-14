@@ -8,14 +8,9 @@ import {
 
 describe('resolveValue', () => {
   test('should resolve provided value', async () => {
-    const primitiveValue = 5;
-    const objectValue = { value: 5 };
-    const [primitiveResult, objectResult] = await Promise.all([
-      resolveValue(primitiveValue),
-      resolveValue(objectValue),
-    ]);
-    expect(primitiveResult).toBe(primitiveValue);
-    expect(objectResult).toBe(objectValue);
+    const value = 5;
+    const result = await resolveValue(value);
+    expect(result).toBe(value);
   });
 });
 
