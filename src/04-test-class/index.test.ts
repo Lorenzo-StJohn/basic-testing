@@ -14,6 +14,10 @@ describe('BankAccount', () => {
     jest.clearAllMocks();
   });
 
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   test('should create account with initial balance', () => {
     expect(account.getBalance()).toBe(initialBalance);
   });
@@ -71,7 +75,11 @@ describe('BankAccount', () => {
   });
 
   test('should set new balance if fetchBalance returned number', async () => {
-    // Write your tests here
+    jest.spyOn(account, 'fetchBalance').mockResolvedValue(200);
+
+    await account.synchronizeBalance();
+
+    expect(account.getBalance()).toBe(200);
   });
 
   test('should throw SynchronizationFailedError if fetchBalance returned null', async () => {
