@@ -27,7 +27,8 @@ describe('BankAccount', () => {
   });
 
   test('should throw error when transferring to the same account', () => {
-    // Write your test here
+    const transferAmount = 50;
+    expect(() => account.transfer(transferAmount, account)).toThrow();
   });
 
   test('should deposit money', () => {
