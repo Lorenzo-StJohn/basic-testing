@@ -43,7 +43,16 @@ describe('doStuffByInterval', () => {
   });
 
   test('should set interval with provided callback and timeout', () => {
-    // Write your test here
+    const callback = jest.fn();
+    const interval = 1000;
+    const setIntervalSpy = jest.spyOn(global, 'setInterval');
+
+    doStuffByInterval(callback, interval);
+
+    expect(setIntervalSpy).toHaveBeenCalledTimes(1);
+    expect(setIntervalSpy).toHaveBeenCalledWith(callback, interval);
+
+    setIntervalSpy.mockRestore();
   });
 
   test('should call callback multiple times after multiple intervals', () => {
