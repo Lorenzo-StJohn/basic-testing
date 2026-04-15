@@ -38,7 +38,9 @@ describe('BankAccount', () => {
   });
 
   test('should withdraw money', () => {
-    // Write your test here
+    const withdrawAmount = 30;
+    const expectedBalance = initialBalance - withdrawAmount;
+    expect(account.withdraw(withdrawAmount).getBalance()).toBe(expectedBalance);
   });
 
   test('should transfer money', () => {
