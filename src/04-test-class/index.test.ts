@@ -1,4 +1,8 @@
-import { getBankAccount, InsufficientFundsError } from '.';
+import {
+  getBankAccount,
+  InsufficientFundsError,
+  SynchronizationFailedError,
+} from '.';
 import { random } from 'lodash';
 
 jest.mock('lodash', () => ({
@@ -83,6 +87,10 @@ describe('BankAccount', () => {
   });
 
   test('should throw SynchronizationFailedError if fetchBalance returned null', async () => {
-    // Write your tests here
+    jest.spyOn(account, 'fetchBalance').mockResolvedValue(null);
+
+    await expect(account.synchronizeBalance()).rejects.toThrow(
+      SynchronizationFailedError,
+    );
   });
 });
