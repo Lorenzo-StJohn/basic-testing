@@ -21,7 +21,9 @@ describe('BankAccount', () => {
   });
 
   test('should throw error when transferring more than balance', () => {
-    // Write your test here
+    const toAccount = getBankAccount(50);
+    const transferAmount = initialBalance + 50;
+    expect(() => account.transfer(transferAmount, toAccount)).toThrow();
   });
 
   test('should throw error when transferring to the same account', () => {
