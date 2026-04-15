@@ -56,7 +56,21 @@ describe('doStuffByInterval', () => {
   });
 
   test('should call callback multiple times after multiple intervals', () => {
-    // Write your test here
+    const callback = jest.fn();
+    const interval = 1000;
+
+    doStuffByInterval(callback, interval);
+
+    expect(callback).not.toHaveBeenCalled();
+
+    jest.advanceTimersByTime(interval);
+    expect(callback).toHaveBeenCalledTimes(1);
+
+    jest.advanceTimersByTime(interval);
+    expect(callback).toHaveBeenCalledTimes(2);
+
+    jest.advanceTimersByTime(interval);
+    expect(callback).toHaveBeenCalledTimes(3);
   });
 });
 
