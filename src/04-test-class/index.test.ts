@@ -1,4 +1,4 @@
-import { getBankAccount } from '.';
+import { getBankAccount, InsufficientFundsError } from '.';
 
 describe('BankAccount', () => {
   let account: ReturnType<typeof getBankAccount>;
@@ -8,12 +8,16 @@ describe('BankAccount', () => {
     account = getBankAccount(initialBalance);
     jest.clearAllMocks();
   });
+
   test('should create account with initial balance', () => {
     expect(account.getBalance()).toBe(initialBalance);
   });
 
   test('should throw InsufficientFundsError error when withdrawing more than balance', () => {
-    // Write your test here
+    const withdrawAmount = initialBalance + 50;
+    expect(() => account.withdraw(withdrawAmount)).toThrow(
+      InsufficientFundsError,
+    );
   });
 
   test('should throw error when transferring more than balance', () => {
