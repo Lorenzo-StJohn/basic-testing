@@ -1,4 +1,9 @@
 import { getBankAccount, InsufficientFundsError } from '.';
+import { random } from 'lodash';
+
+jest.mock('lodash', () => ({
+  random: jest.fn(),
+}));
 
 describe('BankAccount', () => {
   let account: ReturnType<typeof getBankAccount>;
@@ -47,14 +52,22 @@ describe('BankAccount', () => {
     const toAccount = getBankAccount(50);
     const transferAmount = 30;
 
-    const result = account.transfer(transferAmount, toAccount);
+    account.transfer(transferAmount, toAccount);
 
     expect(account.getBalance()).toBe(initialBalance - transferAmount);
     expect(toAccount.getBalance()).toBe(50 + transferAmount);
   });
 
   test('fetchBalance should return number in case if request did not failed', async () => {
-    // Write your tests here
+    const mockBalance = 75;
+    (random as jest.Mock)
+      .mockReturnValueOnce(mockBalance)
+      .mockReturnValueOnce(1);
+
+    const result = await account.fetchBalance();
+
+    expect(typeof result).toBe('number');
+    expect(result).toBe(mockBalance);
   });
 
   test('should set new balance if fetchBalance returned number', async () => {
