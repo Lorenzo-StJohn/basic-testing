@@ -32,7 +32,9 @@ describe('BankAccount', () => {
   });
 
   test('should deposit money', () => {
-    // Write your test here
+    const depositAmount = 50;
+    const expectedBalance = initialBalance + depositAmount;
+    expect(account.deposit(depositAmount).getBalance()).toBe(expectedBalance);
   });
 
   test('should withdraw money', () => {
