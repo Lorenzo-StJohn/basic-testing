@@ -85,6 +85,8 @@ describe('readFileAsynchronously', () => {
   const mockDirname = '/mock/dir';
   const mockPathToFile = 'test.txt';
   const mockFullPath = `${mockDirname}/${mockPathToFile}`;
+  const mockFileContent = 'Hello, world!';
+  const mockBuffer = Buffer.from(mockFileContent);
 
   beforeEach(() => {
     (path.join as jest.Mock).mockReturnValue(mockFullPath);
@@ -110,6 +112,13 @@ describe('readFileAsynchronously', () => {
   });
 
   test('should return file content if file exists', async () => {
-    // Write your test here
+    (fs.existsSync as jest.Mock).mockReturnValue(true);
+    (fsPromises.readFile as jest.Mock).mockResolvedValue(mockBuffer);
+
+    const result = await readFileAsynchronously(mockPathToFile);
+
+    expect(fs.existsSync).toHaveBeenCalledWith(mockFullPath);
+    expect(fsPromises.readFile).toHaveBeenCalledWith(mockFullPath);
+    expect(result).toBe(mockFileContent);
   });
 });
