@@ -1,5 +1,11 @@
 import { readFileAsynchronously, doStuffByTimeout, doStuffByInterval } from '.';
 
+import * as path from 'node:path';
+
+jest.mock('fs');
+jest.mock('fs/promises');
+jest.mock('path');
+
 describe('doStuffByTimeout', () => {
   beforeAll(() => {
     jest.useFakeTimers();
@@ -75,8 +81,20 @@ describe('doStuffByInterval', () => {
 });
 
 describe('readFileAsynchronously', () => {
+  const mockDirname = '/mock/dir';
+  const mockPathToFile = 'test.txt';
+  const mockFullPath = `${mockDirname}/${mockPathToFile}`;
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+    (path.join as jest.Mock).mockReturnValue(mockFullPath);
+  });
+
   test('should call join with pathToFile', async () => {
-    // Write your test here
+    await readFileAsynchronously(mockPathToFile);
+
+    expect(path.join).toHaveBeenCalledTimes(1);
+    expect(path.join).toHaveBeenCalledWith(expect.any(String), mockPathToFile);
   });
 
   test('should return null if file does not exist', async () => {
