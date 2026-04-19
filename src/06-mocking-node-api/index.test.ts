@@ -94,7 +94,6 @@ describe('readFileAsynchronously', () => {
   });
 
   test('should call join with pathToFile', async () => {
-    (path.join as jest.Mock).mockReturnValue(mockFullPath);
     await readFileAsynchronously(mockPathToFile);
 
     expect(path.join).toHaveBeenCalledTimes(1);
