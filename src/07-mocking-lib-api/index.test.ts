@@ -28,7 +28,9 @@ describe('throttledGetDataFromApi', () => {
   });
 
   test('should perform request to correct provided url', async () => {
-    // Write your test here
+    await throttledGetDataFromApi(relativePath);
+    expect(mockAxiosClient.get).toHaveBeenCalledTimes(1);
+    expect(mockAxiosClient.get).toHaveBeenCalledWith(relativePath);
   });
 
   test('should return response data', async () => {
