@@ -16,10 +16,10 @@ describe('throttledGetDataFromApi', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     (axios.create as jest.Mock).mockReturnValue(mockAxiosClient);
+    mockAxiosClient.get.mockResolvedValue({ data: mockData });
   });
 
   test('should create instance with provided base url', async () => {
-    mockAxiosClient.get.mockResolvedValue({ data: mockData });
     await throttledGetDataFromApi(relativePath);
     expect(axios.create).toHaveBeenCalledTimes(1);
     expect(axios.create).toHaveBeenCalledWith({
