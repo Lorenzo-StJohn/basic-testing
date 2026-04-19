@@ -34,6 +34,7 @@ describe('throttledGetDataFromApi', () => {
   });
 
   test('should return response data', async () => {
-    // Write your test here
+    const result = await throttledGetDataFromApi(relativePath);
+    expect(result).toEqual(mockData);
   });
 });
